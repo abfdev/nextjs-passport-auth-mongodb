@@ -1,12 +1,9 @@
-import session, { withSessionApi } from "../../lib/session";
-import withPassport, { passport } from "../../lib/withPassport";
+import { withSessionApi } from "@lib/session";
+import withPassport, { passport } from "@lib/withPassport";
 
 const handler = async (req, res) => {
   await passport.authenticate("local")(req, res, () => {
-    req.session.flash = {
-      type: "success",
-      message: "You have been logged in",
-    };
+    req.session.isAuth = true;
     res.json(req.session);
   });
 };

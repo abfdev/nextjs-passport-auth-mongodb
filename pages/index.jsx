@@ -1,27 +1,30 @@
 import { useRef, useState } from "react";
-import axios from "axios";
-import { useForm } from "react-hook-form";
-import { Input } from "../components/forms";
-import { useRouter } from "next/router";
-import { withSessionSsr } from "../lib/session";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-import Google from "../assets/google.svg";
-import Github from "../assets/github.svg";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+
+import { Input } from "@components/forms";
+import { withSessionSsr } from "@lib/session";
+
+import "react-toastify/dist/ReactToastify.css";
+import Google from "@assets/google.svg";
+import Github from "@assets/github.svg";
+
 /** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
 function Home(props) {
   const [isLoading, setIsLoading] = useState(false);
+  const toastId = useRef(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const router = useRouter();
-  const loginform = useRef(null);
+  const loginForm = useRef(null);
 
-  const notify = () => toast("Wow so easy !");
+  const notify = () => toast("Wow so easy !", {});
 
   const formSubmit = async (data) => {
     if (data) {
@@ -31,6 +34,9 @@ function Home(props) {
         {
           pending: "login processing...",
           error: "Please provide a valid email address and password.",
+        },
+        {
+          toastId,
         }
       );
       if (response.status === 200) {
@@ -41,11 +47,7 @@ function Home(props) {
   return (
     <div className="flex h-screen w-full items-center justify-center">
       <div className="hidden h-full flex-1 lg:flex"></div>
-      <div className="relative flex h-full flex-1 items-center justify-center overflow-hidden bg-gradient-to-b from-[#e0ecf8d4] via-[#eff7ff] to-[#fafbfd] px-6">
-        <img
-          src="https://play.tailwindcss.com/img/beams.jpg"
-          className="absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2 opacity-40"
-        />
+      <div className="relative flex h-full flex-1 items-center justify-center overflow-auto bg-gradient-to-b from-[#e0ecf8d4] via-[#eff7ff] to-[#fafbfd] px-6">
         <div className="relative h-auto w-full flex-none space-y-4 rounded-md border bg-white py-10 px-8 shadow-lg md:w-[500px]">
           {isLoading ? (
             <div className="absolute inset-0 flex animate-pulse overflow-hidden rounded-t-md">
@@ -55,13 +57,18 @@ function Home(props) {
           <h1 className="text-center align-middle text-4xl font-semibold">
             Log in
           </h1>
-          <ToastContainer autoClose={2000} />
+          <ToastContainer
+            position="top-center"
+            autoClose={1200}
+            pauseOnHover
+            ref={toastId}
+          />
           <form
             method="POST"
             onSubmit={handleSubmit(formSubmit)}
             action="/api/login"
             className="flex flex-col space-y-2"
-            ref={loginform}
+            ref={loginForm}
           >
             <Input
               label="email"
@@ -126,8 +133,8 @@ function Home(props) {
 }
 
 export const getServerSideProps = withSessionSsr(({ req }) => {
-  const { passport } = req.session;
-  if (passport?.user) {
+  const { isAuth } = req.session;
+  if (isAuth) {
     return {
       redirect: {
         destination: "/dashboard",

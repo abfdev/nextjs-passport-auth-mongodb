@@ -1,7 +1,7 @@
-import { withSessionApi } from "../../lib/session";
+import { withSessionApi } from "@lib/session";
 
 const handler = async (req, res) => {
-  delete req.session.passport;
+  req.session.destroy();
   res.redirect("/");
 };
 export const config = {

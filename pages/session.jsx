@@ -1,4 +1,4 @@
-import { withSessionSsr } from "../lib/session";
+import { withSessionSsr } from "@lib/session";
 
 /** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
 function Session({ view }) {
@@ -6,10 +6,10 @@ function Session({ view }) {
 }
 
 export const getServerSideProps = withSessionSsr(({ req }) => {
-  console.log(req.session);
+  req.session.view++;
   return {
     props: {
-      view: 1,
+      view: req.session.view,
     },
   };
 });

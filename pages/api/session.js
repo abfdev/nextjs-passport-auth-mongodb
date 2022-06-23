@@ -1,9 +1,9 @@
-import { withSessionApi } from "../../lib/session";
+import { withSessionApi } from "@lib/session";
 
 const handler = async (req, res) => {
-  req.session.view = req.session.view ? req.session.view + 1 : 1;
+  req.session.view = 1;
   res.json({
-    view: req.session.view,
+    view: req.session,
   });
 };
 export const config = {
