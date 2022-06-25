@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 
 import { Input } from "@components/forms";
 
@@ -109,20 +110,21 @@ function Home(props) {
               </span>
               <div className="flex-grow border-2 border-t border-slate-100"></div>
             </div>
-            <button
-              type="submit"
+            <Link
+              href="/api/auth/github"
               className="flex w-full items-center gap-4 rounded-md border-2 border-slate-300 p-3 text-slate-800 shadow-md"
             >
-              <Image width={24} height={24} alt="" src={Github} />
-              Continue With GitHub
-            </button>
-            <button
-              type="submit"
-              className="mt-10 flex w-full items-center gap-4 rounded-md border-2 border-slate-300 p-3 text-slate-800 shadow-md"
-            >
-              <Image src={Google} width={24} height={24} alt="" />
-              Continue With Google
-            </button>
+              <div className="mt-10 flex w-full items-center gap-4 rounded-md border-2 border-slate-300 p-3 text-slate-800 shadow-md">
+                <Image width={24} height={24} alt="" src={Github} />
+                Continue With GitHub
+              </div>
+            </Link>
+            <Link href="/api/auth/google">
+              <div className="mt-10 flex w-full items-center gap-4 rounded-md border-2 border-slate-300 p-3 text-slate-800 shadow-md">
+                <Image src={Google} width={24} height={24} alt="" />
+                Continue With Google
+              </div>
+            </Link>
           </form>
         </div>
       </div>

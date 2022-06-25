@@ -1,10 +1,10 @@
-import localStrategy from "@lib/passport/localStrategy";
+import googleStrategy from "@lib/passport/googleStrategy";
 import withPassport, { passport } from "@lib/withPassport";
 
 const handler = async (req, res) => {
-  await passport.authenticate("local")(req, res, () => {
+  await passport.authenticate("google")(req, res, () => {
     req.session.isAuth = true;
-    res.json(req.session);
+    res.redirect("/dashboard");
   });
 };
 
@@ -13,4 +13,4 @@ export const config = {
     externalResolver: true,
   },
 };
-export default await withPassport(localStrategy, handler);
+export default await withPassport(googleStrategy, handler);
