@@ -6,11 +6,11 @@ import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
 import { Input } from "@components/forms";
-import { withSessionSsr } from "@lib/session";
 
 import "react-toastify/dist/ReactToastify.css";
 import Google from "@assets/google.svg";
 import Github from "@assets/github.svg";
+import { withProtectedRouteNoLogin } from "@lib/protectedRoute";
 
 /** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
 function Home(props) {
@@ -23,8 +23,6 @@ function Home(props) {
   } = useForm();
   const router = useRouter();
   const loginForm = useRef(null);
-
-  const notify = () => toast("Wow so easy !", {});
 
   const formSubmit = async (data) => {
     if (data) {
@@ -132,20 +130,11 @@ function Home(props) {
   );
 }
 
-export const getServerSideProps = withSessionSsr(({ req }) => {
-  const { isAuth } = req.session;
-  if (isAuth) {
-    return {
-      redirect: {
-        destination: "/dashboard",
-      },
-    };
+export const getServerSideProps = withProtectedRouteNoLogin(
+  "/dashboard",
+  async ({ req }) => {
+    return { props: { data: null } };
   }
-  return {
-    props: {
-      data: null,
-    },
-  };
-});
+);
 
 export default Home;

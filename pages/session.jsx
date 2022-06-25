@@ -1,17 +1,12 @@
-import { withSessionSsr } from "@lib/session";
+import { withProtectedRoute } from "@lib/protectedRoute";
 
 /** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
 function Session({ view }) {
   return <div>view {view}</div>;
 }
 
-export const getServerSideProps = withSessionSsr(({ req }) => {
-  req.session.view++;
-  return {
-    props: {
-      view: req.session.view,
-    },
-  };
+export const getServerSideProps = await withProtectedRoute("/", ({ req }) => {
+  return { props: { data: null } };
 });
 
 export default Session;

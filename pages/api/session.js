@@ -1,7 +1,6 @@
-import { withSessionApi } from "@lib/session";
+import { withProtectedApiRoute } from "@lib/protectedRoute";
 
 const handler = async (req, res) => {
-  req.session.view = 1;
   res.json({
     view: req.session,
   });
@@ -11,4 +10,4 @@ export const config = {
     externalResolver: true,
   },
 };
-export default withSessionApi(handler);
+export default withProtectedApiRoute("/", handler);

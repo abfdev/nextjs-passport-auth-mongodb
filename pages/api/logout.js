@@ -1,4 +1,4 @@
-import { withSessionApi } from "@lib/session";
+import { withProtectedApiRoute } from "@lib/protectedRoute";
 
 const handler = async (req, res) => {
   req.session.destroy();
@@ -9,4 +9,4 @@ export const config = {
     externalResolver: true,
   },
 };
-export default withSessionApi(handler);
+export default withProtectedApiRoute("/", handler);
