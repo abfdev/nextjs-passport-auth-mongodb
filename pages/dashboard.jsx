@@ -1,4 +1,5 @@
 import { withSessionSsr } from "@lib/session";
+import Image from "next/image";
 
 /** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
 function Dashboard({ user }) {
@@ -6,13 +7,16 @@ function Dashboard({ user }) {
     <div>
       <h1>name : {user.name}</h1>
       <p>email : {user.email}</p>
-      <img
-        src={
-          user.avatar ||
-          `https://ui-avatars.com/api/?background=random&name=${user.name}&font-size=0.5&size=130`
-        }
-        className="h-12 w-12 rounded-full"
-      />
+      <div className="relative h-20 w-20 overflow-hidden rounded-full">
+        <Image
+          src={
+            user.avatar ||
+            `https://ui-avatars.com/api/?background=random&name=${user.name}&font-size=0.5&size=130`
+          }
+          alt={user.name}
+          layout="fill"
+        />
+      </div>
       <form method="POST" action="/api/logout">
         <button
           className="rounded-md border py-2 px-10 shadow-md"

@@ -5,6 +5,10 @@ const nextConfig = {
     config.experiments.topLevelAwait = true;
     return config;
   },
+  images: {
+    domains: ["ui-avatars.com", "lh3.googleusercontent.com"],
+    dangerouslyAllowSVG: true,
+  },
 };
 
 module.exports = nextConfig;
