@@ -21,20 +21,20 @@ export type User = {
   createdAt: Date
   email: string
   password: string
-  name: string | null
+  displayName: string | null
   role: Role
 }
 
 /**
- * Model GoogleUser
+ * Model Auth
  * 
  */
-export type GoogleUser = {
+export type Auth = {
   id: string
-  googleId: string
-  name: string
-  email: string
-  avatar: string
+  clientId: string
+  displayName: string | null
+  email: string | null
+  avatar: string | null
   role: Role
 }
 
@@ -49,7 +49,7 @@ export type Post = {
   published: boolean
   title: string
   userId: string | null
-  googleUserId: string | null
+  authId: string | null
 }
 
 
@@ -189,14 +189,14 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<GlobalReject>;
 
   /**
-   * `prisma.googleUser`: Exposes CRUD operations for the **GoogleUser** model.
+   * `prisma.auth`: Exposes CRUD operations for the **Auth** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more GoogleUsers
-    * const googleUsers = await prisma.googleUser.findMany()
+    * // Fetch zero or more Auths
+    * const auths = await prisma.auth.findMany()
     * ```
     */
-  get googleUser(): Prisma.GoogleUserDelegate<GlobalReject>;
+  get auth(): Prisma.AuthDelegate<GlobalReject>;
 
   /**
    * `prisma.post`: Exposes CRUD operations for the **Post** model.
@@ -624,7 +624,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    GoogleUser: 'GoogleUser',
+    Auth: 'Auth',
     Post: 'Post'
   };
 
@@ -833,35 +833,35 @@ export namespace Prisma {
 
 
   /**
-   * Count Type GoogleUserCountOutputType
+   * Count Type AuthCountOutputType
    */
 
 
-  export type GoogleUserCountOutputType = {
+  export type AuthCountOutputType = {
     Posts: number
   }
 
-  export type GoogleUserCountOutputTypeSelect = {
+  export type AuthCountOutputTypeSelect = {
     Posts?: boolean
   }
 
-  export type GoogleUserCountOutputTypeGetPayload<
-    S extends boolean | null | undefined | GoogleUserCountOutputTypeArgs,
+  export type AuthCountOutputTypeGetPayload<
+    S extends boolean | null | undefined | AuthCountOutputTypeArgs,
     U = keyof S
       > = S extends true
-        ? GoogleUserCountOutputType
+        ? AuthCountOutputType
     : S extends undefined
     ? never
-    : S extends GoogleUserCountOutputTypeArgs
+    : S extends AuthCountOutputTypeArgs
     ?'include' extends U
-    ? GoogleUserCountOutputType 
+    ? AuthCountOutputType 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]:
-    P extends keyof GoogleUserCountOutputType ? GoogleUserCountOutputType[P] : never
+    P extends keyof AuthCountOutputType ? AuthCountOutputType[P] : never
   } 
-    : GoogleUserCountOutputType
-  : GoogleUserCountOutputType
+    : AuthCountOutputType
+  : AuthCountOutputType
 
 
 
@@ -869,14 +869,14 @@ export namespace Prisma {
   // Custom InputTypes
 
   /**
-   * GoogleUserCountOutputType without action
+   * AuthCountOutputType without action
    */
-  export type GoogleUserCountOutputTypeArgs = {
+  export type AuthCountOutputTypeArgs = {
     /**
-     * Select specific fields to fetch from the GoogleUserCountOutputType
+     * Select specific fields to fetch from the AuthCountOutputType
      * 
     **/
-    select?: GoogleUserCountOutputTypeSelect | null
+    select?: AuthCountOutputTypeSelect | null
   }
 
 
@@ -901,7 +901,7 @@ export namespace Prisma {
     createdAt: Date | null
     email: string | null
     password: string | null
-    name: string | null
+    displayName: string | null
     role: Role | null
   }
 
@@ -910,7 +910,7 @@ export namespace Prisma {
     createdAt: Date | null
     email: string | null
     password: string | null
-    name: string | null
+    displayName: string | null
     role: Role | null
   }
 
@@ -919,7 +919,7 @@ export namespace Prisma {
     createdAt: number
     email: number
     password: number
-    name: number
+    displayName: number
     role: number
     _all: number
   }
@@ -930,7 +930,7 @@ export namespace Prisma {
     createdAt?: true
     email?: true
     password?: true
-    name?: true
+    displayName?: true
     role?: true
   }
 
@@ -939,7 +939,7 @@ export namespace Prisma {
     createdAt?: true
     email?: true
     password?: true
-    name?: true
+    displayName?: true
     role?: true
   }
 
@@ -948,7 +948,7 @@ export namespace Prisma {
     createdAt?: true
     email?: true
     password?: true
-    name?: true
+    displayName?: true
     role?: true
     _all?: true
   }
@@ -1036,7 +1036,7 @@ export namespace Prisma {
     createdAt: Date
     email: string
     password: string
-    name: string | null
+    displayName: string | null
     role: Role
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -1062,7 +1062,7 @@ export namespace Prisma {
     createdAt?: boolean
     email?: boolean
     password?: boolean
-    name?: boolean
+    displayName?: boolean
     role?: boolean
     posts?: boolean | PostFindManyArgs
     _count?: boolean | UserCountOutputTypeArgs
@@ -1822,38 +1822,38 @@ export namespace Prisma {
 
 
   /**
-   * Model GoogleUser
+   * Model Auth
    */
 
 
-  export type AggregateGoogleUser = {
-    _count: GoogleUserCountAggregateOutputType | null
-    _min: GoogleUserMinAggregateOutputType | null
-    _max: GoogleUserMaxAggregateOutputType | null
+  export type AggregateAuth = {
+    _count: AuthCountAggregateOutputType | null
+    _min: AuthMinAggregateOutputType | null
+    _max: AuthMaxAggregateOutputType | null
   }
 
-  export type GoogleUserMinAggregateOutputType = {
+  export type AuthMinAggregateOutputType = {
     id: string | null
-    googleId: string | null
-    name: string | null
+    clientId: string | null
+    displayName: string | null
     email: string | null
     avatar: string | null
     role: Role | null
   }
 
-  export type GoogleUserMaxAggregateOutputType = {
+  export type AuthMaxAggregateOutputType = {
     id: string | null
-    googleId: string | null
-    name: string | null
+    clientId: string | null
+    displayName: string | null
     email: string | null
     avatar: string | null
     role: Role | null
   }
 
-  export type GoogleUserCountAggregateOutputType = {
+  export type AuthCountAggregateOutputType = {
     id: number
-    googleId: number
-    name: number
+    clientId: number
+    displayName: number
     email: number
     avatar: number
     role: number
@@ -1861,291 +1861,291 @@ export namespace Prisma {
   }
 
 
-  export type GoogleUserMinAggregateInputType = {
+  export type AuthMinAggregateInputType = {
     id?: true
-    googleId?: true
-    name?: true
+    clientId?: true
+    displayName?: true
     email?: true
     avatar?: true
     role?: true
   }
 
-  export type GoogleUserMaxAggregateInputType = {
+  export type AuthMaxAggregateInputType = {
     id?: true
-    googleId?: true
-    name?: true
+    clientId?: true
+    displayName?: true
     email?: true
     avatar?: true
     role?: true
   }
 
-  export type GoogleUserCountAggregateInputType = {
+  export type AuthCountAggregateInputType = {
     id?: true
-    googleId?: true
-    name?: true
+    clientId?: true
+    displayName?: true
     email?: true
     avatar?: true
     role?: true
     _all?: true
   }
 
-  export type GoogleUserAggregateArgs = {
+  export type AuthAggregateArgs = {
     /**
-     * Filter which GoogleUser to aggregate.
+     * Filter which Auth to aggregate.
      * 
     **/
-    where?: GoogleUserWhereInput
+    where?: AuthWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of GoogleUsers to fetch.
+     * Determine the order of Auths to fetch.
      * 
     **/
-    orderBy?: Enumerable<GoogleUserOrderByWithRelationInput>
+    orderBy?: Enumerable<AuthOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      * 
     **/
-    cursor?: GoogleUserWhereUniqueInput
+    cursor?: AuthWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` GoogleUsers from the position of the cursor.
+     * Take `±n` Auths from the position of the cursor.
      * 
     **/
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` GoogleUsers.
+     * Skip the first `n` Auths.
      * 
     **/
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned GoogleUsers
+     * Count returned Auths
     **/
-    _count?: true | GoogleUserCountAggregateInputType
+    _count?: true | AuthCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: GoogleUserMinAggregateInputType
+    _min?: AuthMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: GoogleUserMaxAggregateInputType
+    _max?: AuthMaxAggregateInputType
   }
 
-  export type GetGoogleUserAggregateType<T extends GoogleUserAggregateArgs> = {
-        [P in keyof T & keyof AggregateGoogleUser]: P extends '_count' | 'count'
+  export type GetAuthAggregateType<T extends AuthAggregateArgs> = {
+        [P in keyof T & keyof AggregateAuth]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateGoogleUser[P]>
-      : GetScalarType<T[P], AggregateGoogleUser[P]>
+        : GetScalarType<T[P], AggregateAuth[P]>
+      : GetScalarType<T[P], AggregateAuth[P]>
   }
 
 
 
 
-  export type GoogleUserGroupByArgs = {
-    where?: GoogleUserWhereInput
-    orderBy?: Enumerable<GoogleUserOrderByWithAggregationInput>
-    by: Array<GoogleUserScalarFieldEnum>
-    having?: GoogleUserScalarWhereWithAggregatesInput
+  export type AuthGroupByArgs = {
+    where?: AuthWhereInput
+    orderBy?: Enumerable<AuthOrderByWithAggregationInput>
+    by: Array<AuthScalarFieldEnum>
+    having?: AuthScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: GoogleUserCountAggregateInputType | true
-    _min?: GoogleUserMinAggregateInputType
-    _max?: GoogleUserMaxAggregateInputType
+    _count?: AuthCountAggregateInputType | true
+    _min?: AuthMinAggregateInputType
+    _max?: AuthMaxAggregateInputType
   }
 
 
-  export type GoogleUserGroupByOutputType = {
+  export type AuthGroupByOutputType = {
     id: string
-    googleId: string
-    name: string
-    email: string
-    avatar: string
+    clientId: string
+    displayName: string | null
+    email: string | null
+    avatar: string | null
     role: Role
-    _count: GoogleUserCountAggregateOutputType | null
-    _min: GoogleUserMinAggregateOutputType | null
-    _max: GoogleUserMaxAggregateOutputType | null
+    _count: AuthCountAggregateOutputType | null
+    _min: AuthMinAggregateOutputType | null
+    _max: AuthMaxAggregateOutputType | null
   }
 
-  type GetGoogleUserGroupByPayload<T extends GoogleUserGroupByArgs> = PrismaPromise<
+  type GetAuthGroupByPayload<T extends AuthGroupByArgs> = PrismaPromise<
     Array<
-      PickArray<GoogleUserGroupByOutputType, T['by']> &
+      PickArray<AuthGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof GoogleUserGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof AuthGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], GoogleUserGroupByOutputType[P]>
-            : GetScalarType<T[P], GoogleUserGroupByOutputType[P]>
+              : GetScalarType<T[P], AuthGroupByOutputType[P]>
+            : GetScalarType<T[P], AuthGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type GoogleUserSelect = {
+  export type AuthSelect = {
     id?: boolean
-    googleId?: boolean
-    name?: boolean
+    clientId?: boolean
+    displayName?: boolean
     email?: boolean
     avatar?: boolean
     role?: boolean
     Posts?: boolean | PostFindManyArgs
-    _count?: boolean | GoogleUserCountOutputTypeArgs
+    _count?: boolean | AuthCountOutputTypeArgs
   }
 
-  export type GoogleUserInclude = {
+  export type AuthInclude = {
     Posts?: boolean | PostFindManyArgs
-    _count?: boolean | GoogleUserCountOutputTypeArgs
+    _count?: boolean | AuthCountOutputTypeArgs
   }
 
-  export type GoogleUserGetPayload<
-    S extends boolean | null | undefined | GoogleUserArgs,
+  export type AuthGetPayload<
+    S extends boolean | null | undefined | AuthArgs,
     U = keyof S
       > = S extends true
-        ? GoogleUser
+        ? Auth
     : S extends undefined
     ? never
-    : S extends GoogleUserArgs | GoogleUserFindManyArgs
+    : S extends AuthArgs | AuthFindManyArgs
     ?'include' extends U
-    ? GoogleUser  & {
+    ? Auth  & {
     [P in TrueKeys<S['include']>]:
         P extends 'Posts' ? Array < PostGetPayload<S['include'][P]>>  :
-        P extends '_count' ? GoogleUserCountOutputTypeGetPayload<S['include'][P]> :  never
+        P extends '_count' ? AuthCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]:
         P extends 'Posts' ? Array < PostGetPayload<S['select'][P]>>  :
-        P extends '_count' ? GoogleUserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof GoogleUser ? GoogleUser[P] : never
+        P extends '_count' ? AuthCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Auth ? Auth[P] : never
   } 
-    : GoogleUser
-  : GoogleUser
+    : Auth
+  : Auth
 
 
-  type GoogleUserCountArgs = Merge<
-    Omit<GoogleUserFindManyArgs, 'select' | 'include'> & {
-      select?: GoogleUserCountAggregateInputType | true
+  type AuthCountArgs = Merge<
+    Omit<AuthFindManyArgs, 'select' | 'include'> & {
+      select?: AuthCountAggregateInputType | true
     }
   >
 
-  export interface GoogleUserDelegate<GlobalRejectSettings> {
+  export interface AuthDelegate<GlobalRejectSettings> {
     /**
-     * Find zero or one GoogleUser that matches the filter.
-     * @param {GoogleUserFindUniqueArgs} args - Arguments to find a GoogleUser
+     * Find zero or one Auth that matches the filter.
+     * @param {AuthFindUniqueArgs} args - Arguments to find a Auth
      * @example
-     * // Get one GoogleUser
-     * const googleUser = await prisma.googleUser.findUnique({
+     * // Get one Auth
+     * const auth = await prisma.auth.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUnique<T extends GoogleUserFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, GoogleUserFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'GoogleUser'> extends True ? CheckSelect<T, Prisma__GoogleUserClient<GoogleUser>, Prisma__GoogleUserClient<GoogleUserGetPayload<T>>> : CheckSelect<T, Prisma__GoogleUserClient<GoogleUser | null >, Prisma__GoogleUserClient<GoogleUserGetPayload<T> | null >>
+    findUnique<T extends AuthFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, AuthFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Auth'> extends True ? CheckSelect<T, Prisma__AuthClient<Auth>, Prisma__AuthClient<AuthGetPayload<T>>> : CheckSelect<T, Prisma__AuthClient<Auth | null >, Prisma__AuthClient<AuthGetPayload<T> | null >>
 
     /**
-     * Find the first GoogleUser that matches the filter.
+     * Find the first Auth that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GoogleUserFindFirstArgs} args - Arguments to find a GoogleUser
+     * @param {AuthFindFirstArgs} args - Arguments to find a Auth
      * @example
-     * // Get one GoogleUser
-     * const googleUser = await prisma.googleUser.findFirst({
+     * // Get one Auth
+     * const auth = await prisma.auth.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirst<T extends GoogleUserFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, GoogleUserFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'GoogleUser'> extends True ? CheckSelect<T, Prisma__GoogleUserClient<GoogleUser>, Prisma__GoogleUserClient<GoogleUserGetPayload<T>>> : CheckSelect<T, Prisma__GoogleUserClient<GoogleUser | null >, Prisma__GoogleUserClient<GoogleUserGetPayload<T> | null >>
+    findFirst<T extends AuthFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, AuthFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Auth'> extends True ? CheckSelect<T, Prisma__AuthClient<Auth>, Prisma__AuthClient<AuthGetPayload<T>>> : CheckSelect<T, Prisma__AuthClient<Auth | null >, Prisma__AuthClient<AuthGetPayload<T> | null >>
 
     /**
-     * Find zero or more GoogleUsers that matches the filter.
+     * Find zero or more Auths that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GoogleUserFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {AuthFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all GoogleUsers
-     * const googleUsers = await prisma.googleUser.findMany()
+     * // Get all Auths
+     * const auths = await prisma.auth.findMany()
      * 
-     * // Get first 10 GoogleUsers
-     * const googleUsers = await prisma.googleUser.findMany({ take: 10 })
+     * // Get first 10 Auths
+     * const auths = await prisma.auth.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const googleUserWithIdOnly = await prisma.googleUser.findMany({ select: { id: true } })
+     * const authWithIdOnly = await prisma.auth.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends GoogleUserFindManyArgs>(
-      args?: SelectSubset<T, GoogleUserFindManyArgs>
-    ): CheckSelect<T, PrismaPromise<Array<GoogleUser>>, PrismaPromise<Array<GoogleUserGetPayload<T>>>>
+    findMany<T extends AuthFindManyArgs>(
+      args?: SelectSubset<T, AuthFindManyArgs>
+    ): CheckSelect<T, PrismaPromise<Array<Auth>>, PrismaPromise<Array<AuthGetPayload<T>>>>
 
     /**
-     * Create a GoogleUser.
-     * @param {GoogleUserCreateArgs} args - Arguments to create a GoogleUser.
+     * Create a Auth.
+     * @param {AuthCreateArgs} args - Arguments to create a Auth.
      * @example
-     * // Create one GoogleUser
-     * const GoogleUser = await prisma.googleUser.create({
+     * // Create one Auth
+     * const Auth = await prisma.auth.create({
      *   data: {
-     *     // ... data to create a GoogleUser
+     *     // ... data to create a Auth
      *   }
      * })
      * 
     **/
-    create<T extends GoogleUserCreateArgs>(
-      args: SelectSubset<T, GoogleUserCreateArgs>
-    ): CheckSelect<T, Prisma__GoogleUserClient<GoogleUser>, Prisma__GoogleUserClient<GoogleUserGetPayload<T>>>
+    create<T extends AuthCreateArgs>(
+      args: SelectSubset<T, AuthCreateArgs>
+    ): CheckSelect<T, Prisma__AuthClient<Auth>, Prisma__AuthClient<AuthGetPayload<T>>>
 
     /**
-     * Create many GoogleUsers.
-     *     @param {GoogleUserCreateManyArgs} args - Arguments to create many GoogleUsers.
+     * Create many Auths.
+     *     @param {AuthCreateManyArgs} args - Arguments to create many Auths.
      *     @example
-     *     // Create many GoogleUsers
-     *     const googleUser = await prisma.googleUser.createMany({
+     *     // Create many Auths
+     *     const auth = await prisma.auth.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *     
     **/
-    createMany<T extends GoogleUserCreateManyArgs>(
-      args?: SelectSubset<T, GoogleUserCreateManyArgs>
+    createMany<T extends AuthCreateManyArgs>(
+      args?: SelectSubset<T, AuthCreateManyArgs>
     ): PrismaPromise<BatchPayload>
 
     /**
-     * Delete a GoogleUser.
-     * @param {GoogleUserDeleteArgs} args - Arguments to delete one GoogleUser.
+     * Delete a Auth.
+     * @param {AuthDeleteArgs} args - Arguments to delete one Auth.
      * @example
-     * // Delete one GoogleUser
-     * const GoogleUser = await prisma.googleUser.delete({
+     * // Delete one Auth
+     * const Auth = await prisma.auth.delete({
      *   where: {
-     *     // ... filter to delete one GoogleUser
+     *     // ... filter to delete one Auth
      *   }
      * })
      * 
     **/
-    delete<T extends GoogleUserDeleteArgs>(
-      args: SelectSubset<T, GoogleUserDeleteArgs>
-    ): CheckSelect<T, Prisma__GoogleUserClient<GoogleUser>, Prisma__GoogleUserClient<GoogleUserGetPayload<T>>>
+    delete<T extends AuthDeleteArgs>(
+      args: SelectSubset<T, AuthDeleteArgs>
+    ): CheckSelect<T, Prisma__AuthClient<Auth>, Prisma__AuthClient<AuthGetPayload<T>>>
 
     /**
-     * Update one GoogleUser.
-     * @param {GoogleUserUpdateArgs} args - Arguments to update one GoogleUser.
+     * Update one Auth.
+     * @param {AuthUpdateArgs} args - Arguments to update one Auth.
      * @example
-     * // Update one GoogleUser
-     * const googleUser = await prisma.googleUser.update({
+     * // Update one Auth
+     * const auth = await prisma.auth.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2155,34 +2155,34 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends GoogleUserUpdateArgs>(
-      args: SelectSubset<T, GoogleUserUpdateArgs>
-    ): CheckSelect<T, Prisma__GoogleUserClient<GoogleUser>, Prisma__GoogleUserClient<GoogleUserGetPayload<T>>>
+    update<T extends AuthUpdateArgs>(
+      args: SelectSubset<T, AuthUpdateArgs>
+    ): CheckSelect<T, Prisma__AuthClient<Auth>, Prisma__AuthClient<AuthGetPayload<T>>>
 
     /**
-     * Delete zero or more GoogleUsers.
-     * @param {GoogleUserDeleteManyArgs} args - Arguments to filter GoogleUsers to delete.
+     * Delete zero or more Auths.
+     * @param {AuthDeleteManyArgs} args - Arguments to filter Auths to delete.
      * @example
-     * // Delete a few GoogleUsers
-     * const { count } = await prisma.googleUser.deleteMany({
+     * // Delete a few Auths
+     * const { count } = await prisma.auth.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
     **/
-    deleteMany<T extends GoogleUserDeleteManyArgs>(
-      args?: SelectSubset<T, GoogleUserDeleteManyArgs>
+    deleteMany<T extends AuthDeleteManyArgs>(
+      args?: SelectSubset<T, AuthDeleteManyArgs>
     ): PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more GoogleUsers.
+     * Update zero or more Auths.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GoogleUserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {AuthUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many GoogleUsers
-     * const googleUser = await prisma.googleUser.updateMany({
+     * // Update many Auths
+     * const auth = await prisma.auth.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2192,48 +2192,48 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends GoogleUserUpdateManyArgs>(
-      args: SelectSubset<T, GoogleUserUpdateManyArgs>
+    updateMany<T extends AuthUpdateManyArgs>(
+      args: SelectSubset<T, AuthUpdateManyArgs>
     ): PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one GoogleUser.
-     * @param {GoogleUserUpsertArgs} args - Arguments to update or create a GoogleUser.
+     * Create or update one Auth.
+     * @param {AuthUpsertArgs} args - Arguments to update or create a Auth.
      * @example
-     * // Update or create a GoogleUser
-     * const googleUser = await prisma.googleUser.upsert({
+     * // Update or create a Auth
+     * const auth = await prisma.auth.upsert({
      *   create: {
-     *     // ... data to create a GoogleUser
+     *     // ... data to create a Auth
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the GoogleUser we want to update
+     *     // ... the filter for the Auth we want to update
      *   }
      * })
     **/
-    upsert<T extends GoogleUserUpsertArgs>(
-      args: SelectSubset<T, GoogleUserUpsertArgs>
-    ): CheckSelect<T, Prisma__GoogleUserClient<GoogleUser>, Prisma__GoogleUserClient<GoogleUserGetPayload<T>>>
+    upsert<T extends AuthUpsertArgs>(
+      args: SelectSubset<T, AuthUpsertArgs>
+    ): CheckSelect<T, Prisma__AuthClient<Auth>, Prisma__AuthClient<AuthGetPayload<T>>>
 
     /**
-     * Find zero or more GoogleUsers that matches the filter.
-     * @param {GoogleUserFindRawArgs} args - Select which filters you would like to apply.
+     * Find zero or more Auths that matches the filter.
+     * @param {AuthFindRawArgs} args - Select which filters you would like to apply.
      * @example
-     * const googleUser = await prisma.googleUser.findRaw({
+     * const auth = await prisma.auth.findRaw({
      *   filter: { age: { $gt: 25 } } 
      * })
     **/
     findRaw(
-      args?: GoogleUserFindRawArgs
+      args?: AuthFindRawArgs
     ): PrismaPromise<JsonObject>
 
     /**
-     * Perform aggregation operations on a GoogleUser.
-     * @param {GoogleUserAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * Perform aggregation operations on a Auth.
+     * @param {AuthAggregateRawArgs} args - Select which aggregations you would like to apply.
      * @example
-     * const googleUser = await prisma.googleUser.aggregateRaw({
+     * const auth = await prisma.auth.aggregateRaw({
      *   pipeline: [
      *     { $match: { status: "registered" } },
      *     { $group: { _id: "$country", total: { $sum: 1 } } }
@@ -2241,37 +2241,37 @@ export namespace Prisma {
      * })
     **/
     aggregateRaw(
-      args?: GoogleUserAggregateRawArgs
+      args?: AuthAggregateRawArgs
     ): PrismaPromise<JsonObject>
 
     /**
-     * Count the number of GoogleUsers.
+     * Count the number of Auths.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GoogleUserCountArgs} args - Arguments to filter GoogleUsers to count.
+     * @param {AuthCountArgs} args - Arguments to filter Auths to count.
      * @example
-     * // Count the number of GoogleUsers
-     * const count = await prisma.googleUser.count({
+     * // Count the number of Auths
+     * const count = await prisma.auth.count({
      *   where: {
-     *     // ... the filter for the GoogleUsers we want to count
+     *     // ... the filter for the Auths we want to count
      *   }
      * })
     **/
-    count<T extends GoogleUserCountArgs>(
-      args?: Subset<T, GoogleUserCountArgs>,
+    count<T extends AuthCountArgs>(
+      args?: Subset<T, AuthCountArgs>,
     ): PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], GoogleUserCountAggregateOutputType>
+          : GetScalarType<T['select'], AuthCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a GoogleUser.
+     * Allows you to perform aggregations operations on a Auth.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GoogleUserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {AuthAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -2291,13 +2291,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends GoogleUserAggregateArgs>(args: Subset<T, GoogleUserAggregateArgs>): PrismaPromise<GetGoogleUserAggregateType<T>>
+    aggregate<T extends AuthAggregateArgs>(args: Subset<T, AuthAggregateArgs>): PrismaPromise<GetAuthAggregateType<T>>
 
     /**
-     * Group by GoogleUser.
+     * Group by Auth.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GoogleUserGroupByArgs} args - Group by arguments.
+     * @param {AuthGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2312,14 +2312,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends GoogleUserGroupByArgs,
+      T extends AuthGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: GoogleUserGroupByArgs['orderBy'] }
-        : { orderBy?: GoogleUserGroupByArgs['orderBy'] },
+        ? { orderBy: AuthGroupByArgs['orderBy'] }
+        : { orderBy?: AuthGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2368,16 +2368,16 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, GoogleUserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGoogleUserGroupByPayload<T> : PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, AuthGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAuthGroupByPayload<T> : PrismaPromise<InputErrors>
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for GoogleUser.
+   * The delegate class that acts as a "Promise-like" for Auth.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__GoogleUserClient<T> implements PrismaPromise<T> {
+  export class Prisma__AuthClient<T> implements PrismaPromise<T> {
     [prisma]: true;
     private readonly _dmmf;
     private readonly _fetcher;
@@ -2422,293 +2422,293 @@ export namespace Prisma {
   // Custom InputTypes
 
   /**
-   * GoogleUser findUnique
+   * Auth findUnique
    */
-  export type GoogleUserFindUniqueArgs = {
+  export type AuthFindUniqueArgs = {
     /**
-     * Select specific fields to fetch from the GoogleUser
+     * Select specific fields to fetch from the Auth
      * 
     **/
-    select?: GoogleUserSelect | null
+    select?: AuthSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: GoogleUserInclude | null
+    include?: AuthInclude | null
     /**
-     * Throw an Error if a GoogleUser can't be found
+     * Throw an Error if a Auth can't be found
      * 
     **/
     rejectOnNotFound?: RejectOnNotFound
     /**
-     * Filter, which GoogleUser to fetch.
+     * Filter, which Auth to fetch.
      * 
     **/
-    where: GoogleUserWhereUniqueInput
+    where: AuthWhereUniqueInput
   }
 
 
   /**
-   * GoogleUser findFirst
+   * Auth findFirst
    */
-  export type GoogleUserFindFirstArgs = {
+  export type AuthFindFirstArgs = {
     /**
-     * Select specific fields to fetch from the GoogleUser
+     * Select specific fields to fetch from the Auth
      * 
     **/
-    select?: GoogleUserSelect | null
+    select?: AuthSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: GoogleUserInclude | null
+    include?: AuthInclude | null
     /**
-     * Throw an Error if a GoogleUser can't be found
+     * Throw an Error if a Auth can't be found
      * 
     **/
     rejectOnNotFound?: RejectOnNotFound
     /**
-     * Filter, which GoogleUser to fetch.
+     * Filter, which Auth to fetch.
      * 
     **/
-    where?: GoogleUserWhereInput
+    where?: AuthWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of GoogleUsers to fetch.
+     * Determine the order of Auths to fetch.
      * 
     **/
-    orderBy?: Enumerable<GoogleUserOrderByWithRelationInput>
+    orderBy?: Enumerable<AuthOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for GoogleUsers.
+     * Sets the position for searching for Auths.
      * 
     **/
-    cursor?: GoogleUserWhereUniqueInput
+    cursor?: AuthWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` GoogleUsers from the position of the cursor.
+     * Take `±n` Auths from the position of the cursor.
      * 
     **/
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` GoogleUsers.
+     * Skip the first `n` Auths.
      * 
     **/
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of GoogleUsers.
+     * Filter by unique combinations of Auths.
      * 
     **/
-    distinct?: Enumerable<GoogleUserScalarFieldEnum>
+    distinct?: Enumerable<AuthScalarFieldEnum>
   }
 
 
   /**
-   * GoogleUser findMany
+   * Auth findMany
    */
-  export type GoogleUserFindManyArgs = {
+  export type AuthFindManyArgs = {
     /**
-     * Select specific fields to fetch from the GoogleUser
+     * Select specific fields to fetch from the Auth
      * 
     **/
-    select?: GoogleUserSelect | null
+    select?: AuthSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: GoogleUserInclude | null
+    include?: AuthInclude | null
     /**
-     * Filter, which GoogleUsers to fetch.
+     * Filter, which Auths to fetch.
      * 
     **/
-    where?: GoogleUserWhereInput
+    where?: AuthWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of GoogleUsers to fetch.
+     * Determine the order of Auths to fetch.
      * 
     **/
-    orderBy?: Enumerable<GoogleUserOrderByWithRelationInput>
+    orderBy?: Enumerable<AuthOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing GoogleUsers.
+     * Sets the position for listing Auths.
      * 
     **/
-    cursor?: GoogleUserWhereUniqueInput
+    cursor?: AuthWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` GoogleUsers from the position of the cursor.
+     * Take `±n` Auths from the position of the cursor.
      * 
     **/
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` GoogleUsers.
+     * Skip the first `n` Auths.
      * 
     **/
     skip?: number
-    distinct?: Enumerable<GoogleUserScalarFieldEnum>
+    distinct?: Enumerable<AuthScalarFieldEnum>
   }
 
 
   /**
-   * GoogleUser create
+   * Auth create
    */
-  export type GoogleUserCreateArgs = {
+  export type AuthCreateArgs = {
     /**
-     * Select specific fields to fetch from the GoogleUser
+     * Select specific fields to fetch from the Auth
      * 
     **/
-    select?: GoogleUserSelect | null
+    select?: AuthSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: GoogleUserInclude | null
+    include?: AuthInclude | null
     /**
-     * The data needed to create a GoogleUser.
+     * The data needed to create a Auth.
      * 
     **/
-    data: XOR<GoogleUserCreateInput, GoogleUserUncheckedCreateInput>
+    data: XOR<AuthCreateInput, AuthUncheckedCreateInput>
   }
 
 
   /**
-   * GoogleUser createMany
+   * Auth createMany
    */
-  export type GoogleUserCreateManyArgs = {
+  export type AuthCreateManyArgs = {
     /**
-     * The data used to create many GoogleUsers.
+     * The data used to create many Auths.
      * 
     **/
-    data: Enumerable<GoogleUserCreateManyInput>
+    data: Enumerable<AuthCreateManyInput>
   }
 
 
   /**
-   * GoogleUser update
+   * Auth update
    */
-  export type GoogleUserUpdateArgs = {
+  export type AuthUpdateArgs = {
     /**
-     * Select specific fields to fetch from the GoogleUser
+     * Select specific fields to fetch from the Auth
      * 
     **/
-    select?: GoogleUserSelect | null
+    select?: AuthSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: GoogleUserInclude | null
+    include?: AuthInclude | null
     /**
-     * The data needed to update a GoogleUser.
+     * The data needed to update a Auth.
      * 
     **/
-    data: XOR<GoogleUserUpdateInput, GoogleUserUncheckedUpdateInput>
+    data: XOR<AuthUpdateInput, AuthUncheckedUpdateInput>
     /**
-     * Choose, which GoogleUser to update.
+     * Choose, which Auth to update.
      * 
     **/
-    where: GoogleUserWhereUniqueInput
+    where: AuthWhereUniqueInput
   }
 
 
   /**
-   * GoogleUser updateMany
+   * Auth updateMany
    */
-  export type GoogleUserUpdateManyArgs = {
+  export type AuthUpdateManyArgs = {
     /**
-     * The data used to update GoogleUsers.
+     * The data used to update Auths.
      * 
     **/
-    data: XOR<GoogleUserUpdateManyMutationInput, GoogleUserUncheckedUpdateManyInput>
+    data: XOR<AuthUpdateManyMutationInput, AuthUncheckedUpdateManyInput>
     /**
-     * Filter which GoogleUsers to update
+     * Filter which Auths to update
      * 
     **/
-    where?: GoogleUserWhereInput
+    where?: AuthWhereInput
   }
 
 
   /**
-   * GoogleUser upsert
+   * Auth upsert
    */
-  export type GoogleUserUpsertArgs = {
+  export type AuthUpsertArgs = {
     /**
-     * Select specific fields to fetch from the GoogleUser
+     * Select specific fields to fetch from the Auth
      * 
     **/
-    select?: GoogleUserSelect | null
+    select?: AuthSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: GoogleUserInclude | null
+    include?: AuthInclude | null
     /**
-     * The filter to search for the GoogleUser to update in case it exists.
+     * The filter to search for the Auth to update in case it exists.
      * 
     **/
-    where: GoogleUserWhereUniqueInput
+    where: AuthWhereUniqueInput
     /**
-     * In case the GoogleUser found by the `where` argument doesn't exist, create a new GoogleUser with this data.
+     * In case the Auth found by the `where` argument doesn't exist, create a new Auth with this data.
      * 
     **/
-    create: XOR<GoogleUserCreateInput, GoogleUserUncheckedCreateInput>
+    create: XOR<AuthCreateInput, AuthUncheckedCreateInput>
     /**
-     * In case the GoogleUser was found with the provided `where` argument, update it with this data.
+     * In case the Auth was found with the provided `where` argument, update it with this data.
      * 
     **/
-    update: XOR<GoogleUserUpdateInput, GoogleUserUncheckedUpdateInput>
+    update: XOR<AuthUpdateInput, AuthUncheckedUpdateInput>
   }
 
 
   /**
-   * GoogleUser delete
+   * Auth delete
    */
-  export type GoogleUserDeleteArgs = {
+  export type AuthDeleteArgs = {
     /**
-     * Select specific fields to fetch from the GoogleUser
+     * Select specific fields to fetch from the Auth
      * 
     **/
-    select?: GoogleUserSelect | null
+    select?: AuthSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: GoogleUserInclude | null
+    include?: AuthInclude | null
     /**
-     * Filter which GoogleUser to delete.
+     * Filter which Auth to delete.
      * 
     **/
-    where: GoogleUserWhereUniqueInput
+    where: AuthWhereUniqueInput
   }
 
 
   /**
-   * GoogleUser deleteMany
+   * Auth deleteMany
    */
-  export type GoogleUserDeleteManyArgs = {
+  export type AuthDeleteManyArgs = {
     /**
-     * Filter which GoogleUsers to delete
+     * Filter which Auths to delete
      * 
     **/
-    where?: GoogleUserWhereInput
+    where?: AuthWhereInput
   }
 
 
   /**
-   * GoogleUser findRaw
+   * Auth findRaw
    */
-  export type GoogleUserFindRawArgs = {
+  export type AuthFindRawArgs = {
     /**
      * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
      * 
@@ -2723,9 +2723,9 @@ export namespace Prisma {
 
 
   /**
-   * GoogleUser aggregateRaw
+   * Auth aggregateRaw
    */
-  export type GoogleUserAggregateRawArgs = {
+  export type AuthAggregateRawArgs = {
     /**
      * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
      * 
@@ -2740,19 +2740,19 @@ export namespace Prisma {
 
 
   /**
-   * GoogleUser without action
+   * Auth without action
    */
-  export type GoogleUserArgs = {
+  export type AuthArgs = {
     /**
-     * Select specific fields to fetch from the GoogleUser
+     * Select specific fields to fetch from the Auth
      * 
     **/
-    select?: GoogleUserSelect | null
+    select?: AuthSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      * 
     **/
-    include?: GoogleUserInclude | null
+    include?: AuthInclude | null
   }
 
 
@@ -2775,7 +2775,7 @@ export namespace Prisma {
     published: boolean | null
     title: string | null
     userId: string | null
-    googleUserId: string | null
+    authId: string | null
   }
 
   export type PostMaxAggregateOutputType = {
@@ -2785,7 +2785,7 @@ export namespace Prisma {
     published: boolean | null
     title: string | null
     userId: string | null
-    googleUserId: string | null
+    authId: string | null
   }
 
   export type PostCountAggregateOutputType = {
@@ -2795,7 +2795,7 @@ export namespace Prisma {
     published: number
     title: number
     userId: number
-    googleUserId: number
+    authId: number
     _all: number
   }
 
@@ -2807,7 +2807,7 @@ export namespace Prisma {
     published?: true
     title?: true
     userId?: true
-    googleUserId?: true
+    authId?: true
   }
 
   export type PostMaxAggregateInputType = {
@@ -2817,7 +2817,7 @@ export namespace Prisma {
     published?: true
     title?: true
     userId?: true
-    googleUserId?: true
+    authId?: true
   }
 
   export type PostCountAggregateInputType = {
@@ -2827,7 +2827,7 @@ export namespace Prisma {
     published?: true
     title?: true
     userId?: true
-    googleUserId?: true
+    authId?: true
     _all?: true
   }
 
@@ -2916,7 +2916,7 @@ export namespace Prisma {
     published: boolean
     title: string
     userId: string | null
-    googleUserId: string | null
+    authId: string | null
     _count: PostCountAggregateOutputType | null
     _min: PostMinAggregateOutputType | null
     _max: PostMaxAggregateOutputType | null
@@ -2944,13 +2944,13 @@ export namespace Prisma {
     title?: boolean
     user?: boolean | UserArgs
     userId?: boolean
-    googleUser?: boolean | GoogleUserArgs
-    googleUserId?: boolean
+    auth?: boolean | AuthArgs
+    authId?: boolean
   }
 
   export type PostInclude = {
     user?: boolean | UserArgs
-    googleUser?: boolean | GoogleUserArgs
+    auth?: boolean | AuthArgs
   }
 
   export type PostGetPayload<
@@ -2965,13 +2965,13 @@ export namespace Prisma {
     ? Post  & {
     [P in TrueKeys<S['include']>]:
         P extends 'user' ? UserGetPayload<S['include'][P]> | null :
-        P extends 'googleUser' ? GoogleUserGetPayload<S['include'][P]> | null :  never
+        P extends 'auth' ? AuthGetPayload<S['include'][P]> | null :  never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]:
         P extends 'user' ? UserGetPayload<S['select'][P]> | null :
-        P extends 'googleUser' ? GoogleUserGetPayload<S['select'][P]> | null :  P extends keyof Post ? Post[P] : never
+        P extends 'auth' ? AuthGetPayload<S['select'][P]> | null :  P extends keyof Post ? Post[P] : never
   } 
     : Post
   : Post
@@ -3340,7 +3340,7 @@ export namespace Prisma {
 
     user<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null >, Prisma__UserClient<UserGetPayload<T> | null >>;
 
-    googleUser<T extends GoogleUserArgs = {}>(args?: Subset<T, GoogleUserArgs>): CheckSelect<T, Prisma__GoogleUserClient<GoogleUser | null >, Prisma__GoogleUserClient<GoogleUserGetPayload<T> | null >>;
+    auth<T extends AuthArgs = {}>(args?: Subset<T, AuthArgs>): CheckSelect<T, Prisma__AuthClient<Auth | null >, Prisma__AuthClient<AuthGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -3715,23 +3715,23 @@ export namespace Prisma {
     createdAt: 'createdAt',
     email: 'email',
     password: 'password',
-    name: 'name',
+    displayName: 'displayName',
     role: 'role'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-  export const GoogleUserScalarFieldEnum: {
+  export const AuthScalarFieldEnum: {
     id: 'id',
-    googleId: 'googleId',
-    name: 'name',
+    clientId: 'clientId',
+    displayName: 'displayName',
     email: 'email',
     avatar: 'avatar',
     role: 'role'
   };
 
-  export type GoogleUserScalarFieldEnum = (typeof GoogleUserScalarFieldEnum)[keyof typeof GoogleUserScalarFieldEnum]
+  export type AuthScalarFieldEnum = (typeof AuthScalarFieldEnum)[keyof typeof AuthScalarFieldEnum]
 
 
   export const PostScalarFieldEnum: {
@@ -3741,7 +3741,7 @@ export namespace Prisma {
     published: 'published',
     title: 'title',
     userId: 'userId',
-    googleUserId: 'googleUserId'
+    authId: 'authId'
   };
 
   export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
@@ -3776,7 +3776,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter | Date | string
     email?: StringFilter | string
     password?: StringFilter | string
-    name?: StringNullableFilter | string | null
+    displayName?: StringNullableFilter | string | null
     role?: EnumRoleFilter | Role
     posts?: PostListRelationFilter
   }
@@ -3786,7 +3786,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    name?: SortOrder
+    displayName?: SortOrder
     role?: SortOrder
     posts?: PostOrderByRelationAggregateInput
   }
@@ -3801,7 +3801,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    name?: SortOrder
+    displayName?: SortOrder
     role?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -3816,59 +3816,59 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter | Date | string
     email?: StringWithAggregatesFilter | string
     password?: StringWithAggregatesFilter | string
-    name?: StringNullableWithAggregatesFilter | string | null
+    displayName?: StringNullableWithAggregatesFilter | string | null
     role?: EnumRoleWithAggregatesFilter | Role
   }
 
-  export type GoogleUserWhereInput = {
-    AND?: Enumerable<GoogleUserWhereInput>
-    OR?: Enumerable<GoogleUserWhereInput>
-    NOT?: Enumerable<GoogleUserWhereInput>
+  export type AuthWhereInput = {
+    AND?: Enumerable<AuthWhereInput>
+    OR?: Enumerable<AuthWhereInput>
+    NOT?: Enumerable<AuthWhereInput>
     id?: StringFilter | string
-    googleId?: StringFilter | string
-    name?: StringFilter | string
-    email?: StringFilter | string
-    avatar?: StringFilter | string
+    clientId?: StringFilter | string
+    displayName?: StringNullableFilter | string | null
+    email?: StringNullableFilter | string | null
+    avatar?: StringNullableFilter | string | null
     role?: EnumRoleFilter | Role
     Posts?: PostListRelationFilter
   }
 
-  export type GoogleUserOrderByWithRelationInput = {
+  export type AuthOrderByWithRelationInput = {
     id?: SortOrder
-    googleId?: SortOrder
-    name?: SortOrder
+    clientId?: SortOrder
+    displayName?: SortOrder
     email?: SortOrder
     avatar?: SortOrder
     role?: SortOrder
     Posts?: PostOrderByRelationAggregateInput
   }
 
-  export type GoogleUserWhereUniqueInput = {
+  export type AuthWhereUniqueInput = {
     id?: string
-    googleId?: string
+    clientId?: string
   }
 
-  export type GoogleUserOrderByWithAggregationInput = {
+  export type AuthOrderByWithAggregationInput = {
     id?: SortOrder
-    googleId?: SortOrder
-    name?: SortOrder
+    clientId?: SortOrder
+    displayName?: SortOrder
     email?: SortOrder
     avatar?: SortOrder
     role?: SortOrder
-    _count?: GoogleUserCountOrderByAggregateInput
-    _max?: GoogleUserMaxOrderByAggregateInput
-    _min?: GoogleUserMinOrderByAggregateInput
+    _count?: AuthCountOrderByAggregateInput
+    _max?: AuthMaxOrderByAggregateInput
+    _min?: AuthMinOrderByAggregateInput
   }
 
-  export type GoogleUserScalarWhereWithAggregatesInput = {
-    AND?: Enumerable<GoogleUserScalarWhereWithAggregatesInput>
-    OR?: Enumerable<GoogleUserScalarWhereWithAggregatesInput>
-    NOT?: Enumerable<GoogleUserScalarWhereWithAggregatesInput>
+  export type AuthScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<AuthScalarWhereWithAggregatesInput>
+    OR?: Enumerable<AuthScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<AuthScalarWhereWithAggregatesInput>
     id?: StringWithAggregatesFilter | string
-    googleId?: StringWithAggregatesFilter | string
-    name?: StringWithAggregatesFilter | string
-    email?: StringWithAggregatesFilter | string
-    avatar?: StringWithAggregatesFilter | string
+    clientId?: StringWithAggregatesFilter | string
+    displayName?: StringNullableWithAggregatesFilter | string | null
+    email?: StringNullableWithAggregatesFilter | string | null
+    avatar?: StringNullableWithAggregatesFilter | string | null
     role?: EnumRoleWithAggregatesFilter | Role
   }
 
@@ -3883,8 +3883,8 @@ export namespace Prisma {
     title?: StringFilter | string
     user?: XOR<UserRelationFilter, UserWhereInput> | null
     userId?: StringNullableFilter | string | null
-    googleUser?: XOR<GoogleUserRelationFilter, GoogleUserWhereInput> | null
-    googleUserId?: StringNullableFilter | string | null
+    auth?: XOR<AuthRelationFilter, AuthWhereInput> | null
+    authId?: StringNullableFilter | string | null
   }
 
   export type PostOrderByWithRelationInput = {
@@ -3895,8 +3895,8 @@ export namespace Prisma {
     title?: SortOrder
     user?: UserOrderByWithRelationInput
     userId?: SortOrder
-    googleUser?: GoogleUserOrderByWithRelationInput
-    googleUserId?: SortOrder
+    auth?: AuthOrderByWithRelationInput
+    authId?: SortOrder
   }
 
   export type PostWhereUniqueInput = {
@@ -3910,7 +3910,7 @@ export namespace Prisma {
     published?: SortOrder
     title?: SortOrder
     userId?: SortOrder
-    googleUserId?: SortOrder
+    authId?: SortOrder
     _count?: PostCountOrderByAggregateInput
     _max?: PostMaxOrderByAggregateInput
     _min?: PostMinOrderByAggregateInput
@@ -3926,7 +3926,7 @@ export namespace Prisma {
     published?: BoolWithAggregatesFilter | boolean
     title?: StringWithAggregatesFilter | string
     userId?: StringNullableWithAggregatesFilter | string | null
-    googleUserId?: StringNullableWithAggregatesFilter | string | null
+    authId?: StringNullableWithAggregatesFilter | string | null
   }
 
   export type UserCreateInput = {
@@ -3934,7 +3934,7 @@ export namespace Prisma {
     createdAt?: Date | string
     email: string
     password: string
-    name?: string | null
+    displayName?: string | null
     role?: Role
     posts?: PostCreateNestedManyWithoutUserInput
   }
@@ -3944,7 +3944,7 @@ export namespace Prisma {
     createdAt?: Date | string
     email: string
     password: string
-    name?: string | null
+    displayName?: string | null
     role?: Role
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
   }
@@ -3953,7 +3953,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
     posts?: PostUpdateManyWithoutUserInput
   }
@@ -3962,7 +3962,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
     posts?: PostUncheckedUpdateManyWithoutUserInput
   }
@@ -3972,7 +3972,7 @@ export namespace Prisma {
     createdAt?: Date | string
     email: string
     password: string
-    name?: string | null
+    displayName?: string | null
     role?: Role
   }
 
@@ -3980,7 +3980,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
   }
 
@@ -3988,70 +3988,70 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
   }
 
-  export type GoogleUserCreateInput = {
+  export type AuthCreateInput = {
     id?: string
-    googleId: string
-    name: string
-    email: string
-    avatar: string
+    clientId: string
+    displayName?: string | null
+    email?: string | null
+    avatar?: string | null
     role?: Role
-    Posts?: PostCreateNestedManyWithoutGoogleUserInput
+    Posts?: PostCreateNestedManyWithoutAuthInput
   }
 
-  export type GoogleUserUncheckedCreateInput = {
+  export type AuthUncheckedCreateInput = {
     id?: string
-    googleId: string
-    name: string
-    email: string
-    avatar: string
+    clientId: string
+    displayName?: string | null
+    email?: string | null
+    avatar?: string | null
     role?: Role
-    Posts?: PostUncheckedCreateNestedManyWithoutGoogleUserInput
+    Posts?: PostUncheckedCreateNestedManyWithoutAuthInput
   }
 
-  export type GoogleUserUpdateInput = {
-    googleId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    avatar?: StringFieldUpdateOperationsInput | string
+  export type AuthUpdateInput = {
+    clientId?: StringFieldUpdateOperationsInput | string
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    Posts?: PostUpdateManyWithoutGoogleUserInput
+    Posts?: PostUpdateManyWithoutAuthInput
   }
 
-  export type GoogleUserUncheckedUpdateInput = {
-    googleId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    avatar?: StringFieldUpdateOperationsInput | string
+  export type AuthUncheckedUpdateInput = {
+    clientId?: StringFieldUpdateOperationsInput | string
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    Posts?: PostUncheckedUpdateManyWithoutGoogleUserInput
+    Posts?: PostUncheckedUpdateManyWithoutAuthInput
   }
 
-  export type GoogleUserCreateManyInput = {
+  export type AuthCreateManyInput = {
     id?: string
-    googleId: string
-    name: string
-    email: string
-    avatar: string
+    clientId: string
+    displayName?: string | null
+    email?: string | null
+    avatar?: string | null
     role?: Role
   }
 
-  export type GoogleUserUpdateManyMutationInput = {
-    googleId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    avatar?: StringFieldUpdateOperationsInput | string
+  export type AuthUpdateManyMutationInput = {
+    clientId?: StringFieldUpdateOperationsInput | string
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
   }
 
-  export type GoogleUserUncheckedUpdateManyInput = {
-    googleId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    avatar?: StringFieldUpdateOperationsInput | string
+  export type AuthUncheckedUpdateManyInput = {
+    clientId?: StringFieldUpdateOperationsInput | string
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
   }
 
@@ -4062,7 +4062,7 @@ export namespace Prisma {
     published?: boolean
     title: string
     user?: UserCreateNestedOneWithoutPostsInput
-    googleUser?: GoogleUserCreateNestedOneWithoutPostsInput
+    auth?: AuthCreateNestedOneWithoutPostsInput
   }
 
   export type PostUncheckedCreateInput = {
@@ -4072,7 +4072,7 @@ export namespace Prisma {
     published?: boolean
     title: string
     userId?: string | null
-    googleUserId?: string | null
+    authId?: string | null
   }
 
   export type PostUpdateInput = {
@@ -4081,7 +4081,7 @@ export namespace Prisma {
     published?: BoolFieldUpdateOperationsInput | boolean
     title?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneWithoutPostsInput
-    googleUser?: GoogleUserUpdateOneWithoutPostsInput
+    auth?: AuthUpdateOneWithoutPostsInput
   }
 
   export type PostUncheckedUpdateInput = {
@@ -4090,7 +4090,7 @@ export namespace Prisma {
     published?: BoolFieldUpdateOperationsInput | boolean
     title?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    googleUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    authId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PostCreateManyInput = {
@@ -4100,7 +4100,7 @@ export namespace Prisma {
     published?: boolean
     title: string
     userId?: string | null
-    googleUserId?: string | null
+    authId?: string | null
   }
 
   export type PostUpdateManyMutationInput = {
@@ -4116,7 +4116,7 @@ export namespace Prisma {
     published?: BoolFieldUpdateOperationsInput | boolean
     title?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    googleUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    authId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter = {
@@ -4183,7 +4183,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    name?: SortOrder
+    displayName?: SortOrder
     role?: SortOrder
   }
 
@@ -4192,7 +4192,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    name?: SortOrder
+    displayName?: SortOrder
     role?: SortOrder
   }
 
@@ -4201,7 +4201,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    name?: SortOrder
+    displayName?: SortOrder
     role?: SortOrder
   }
 
@@ -4266,28 +4266,28 @@ export namespace Prisma {
     _max?: NestedEnumRoleFilter
   }
 
-  export type GoogleUserCountOrderByAggregateInput = {
+  export type AuthCountOrderByAggregateInput = {
     id?: SortOrder
-    googleId?: SortOrder
-    name?: SortOrder
+    clientId?: SortOrder
+    displayName?: SortOrder
     email?: SortOrder
     avatar?: SortOrder
     role?: SortOrder
   }
 
-  export type GoogleUserMaxOrderByAggregateInput = {
+  export type AuthMaxOrderByAggregateInput = {
     id?: SortOrder
-    googleId?: SortOrder
-    name?: SortOrder
+    clientId?: SortOrder
+    displayName?: SortOrder
     email?: SortOrder
     avatar?: SortOrder
     role?: SortOrder
   }
 
-  export type GoogleUserMinOrderByAggregateInput = {
+  export type AuthMinOrderByAggregateInput = {
     id?: SortOrder
-    googleId?: SortOrder
-    name?: SortOrder
+    clientId?: SortOrder
+    displayName?: SortOrder
     email?: SortOrder
     avatar?: SortOrder
     role?: SortOrder
@@ -4303,9 +4303,9 @@ export namespace Prisma {
     isNot?: UserWhereInput | null
   }
 
-  export type GoogleUserRelationFilter = {
-    is?: GoogleUserWhereInput | null
-    isNot?: GoogleUserWhereInput | null
+  export type AuthRelationFilter = {
+    is?: AuthWhereInput | null
+    isNot?: AuthWhereInput | null
   }
 
   export type PostCountOrderByAggregateInput = {
@@ -4315,7 +4315,7 @@ export namespace Prisma {
     published?: SortOrder
     title?: SortOrder
     userId?: SortOrder
-    googleUserId?: SortOrder
+    authId?: SortOrder
   }
 
   export type PostMaxOrderByAggregateInput = {
@@ -4325,7 +4325,7 @@ export namespace Prisma {
     published?: SortOrder
     title?: SortOrder
     userId?: SortOrder
-    googleUserId?: SortOrder
+    authId?: SortOrder
   }
 
   export type PostMinOrderByAggregateInput = {
@@ -4335,7 +4335,7 @@ export namespace Prisma {
     published?: SortOrder
     title?: SortOrder
     userId?: SortOrder
-    googleUserId?: SortOrder
+    authId?: SortOrder
   }
 
   export type BoolWithAggregatesFilter = {
@@ -4405,45 +4405,45 @@ export namespace Prisma {
     deleteMany?: Enumerable<PostScalarWhereInput>
   }
 
-  export type PostCreateNestedManyWithoutGoogleUserInput = {
-    create?: XOR<Enumerable<PostCreateWithoutGoogleUserInput>, Enumerable<PostUncheckedCreateWithoutGoogleUserInput>>
-    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutGoogleUserInput>
-    createMany?: PostCreateManyGoogleUserInputEnvelope
+  export type PostCreateNestedManyWithoutAuthInput = {
+    create?: XOR<Enumerable<PostCreateWithoutAuthInput>, Enumerable<PostUncheckedCreateWithoutAuthInput>>
+    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthInput>
+    createMany?: PostCreateManyAuthInputEnvelope
     connect?: Enumerable<PostWhereUniqueInput>
   }
 
-  export type PostUncheckedCreateNestedManyWithoutGoogleUserInput = {
-    create?: XOR<Enumerable<PostCreateWithoutGoogleUserInput>, Enumerable<PostUncheckedCreateWithoutGoogleUserInput>>
-    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutGoogleUserInput>
-    createMany?: PostCreateManyGoogleUserInputEnvelope
+  export type PostUncheckedCreateNestedManyWithoutAuthInput = {
+    create?: XOR<Enumerable<PostCreateWithoutAuthInput>, Enumerable<PostUncheckedCreateWithoutAuthInput>>
+    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthInput>
+    createMany?: PostCreateManyAuthInputEnvelope
     connect?: Enumerable<PostWhereUniqueInput>
   }
 
-  export type PostUpdateManyWithoutGoogleUserInput = {
-    create?: XOR<Enumerable<PostCreateWithoutGoogleUserInput>, Enumerable<PostUncheckedCreateWithoutGoogleUserInput>>
-    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutGoogleUserInput>
-    upsert?: Enumerable<PostUpsertWithWhereUniqueWithoutGoogleUserInput>
-    createMany?: PostCreateManyGoogleUserInputEnvelope
+  export type PostUpdateManyWithoutAuthInput = {
+    create?: XOR<Enumerable<PostCreateWithoutAuthInput>, Enumerable<PostUncheckedCreateWithoutAuthInput>>
+    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthInput>
+    upsert?: Enumerable<PostUpsertWithWhereUniqueWithoutAuthInput>
+    createMany?: PostCreateManyAuthInputEnvelope
     set?: Enumerable<PostWhereUniqueInput>
     disconnect?: Enumerable<PostWhereUniqueInput>
     delete?: Enumerable<PostWhereUniqueInput>
     connect?: Enumerable<PostWhereUniqueInput>
-    update?: Enumerable<PostUpdateWithWhereUniqueWithoutGoogleUserInput>
-    updateMany?: Enumerable<PostUpdateManyWithWhereWithoutGoogleUserInput>
+    update?: Enumerable<PostUpdateWithWhereUniqueWithoutAuthInput>
+    updateMany?: Enumerable<PostUpdateManyWithWhereWithoutAuthInput>
     deleteMany?: Enumerable<PostScalarWhereInput>
   }
 
-  export type PostUncheckedUpdateManyWithoutGoogleUserInput = {
-    create?: XOR<Enumerable<PostCreateWithoutGoogleUserInput>, Enumerable<PostUncheckedCreateWithoutGoogleUserInput>>
-    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutGoogleUserInput>
-    upsert?: Enumerable<PostUpsertWithWhereUniqueWithoutGoogleUserInput>
-    createMany?: PostCreateManyGoogleUserInputEnvelope
+  export type PostUncheckedUpdateManyWithoutAuthInput = {
+    create?: XOR<Enumerable<PostCreateWithoutAuthInput>, Enumerable<PostUncheckedCreateWithoutAuthInput>>
+    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthInput>
+    upsert?: Enumerable<PostUpsertWithWhereUniqueWithoutAuthInput>
+    createMany?: PostCreateManyAuthInputEnvelope
     set?: Enumerable<PostWhereUniqueInput>
     disconnect?: Enumerable<PostWhereUniqueInput>
     delete?: Enumerable<PostWhereUniqueInput>
     connect?: Enumerable<PostWhereUniqueInput>
-    update?: Enumerable<PostUpdateWithWhereUniqueWithoutGoogleUserInput>
-    updateMany?: Enumerable<PostUpdateManyWithWhereWithoutGoogleUserInput>
+    update?: Enumerable<PostUpdateWithWhereUniqueWithoutAuthInput>
+    updateMany?: Enumerable<PostUpdateManyWithWhereWithoutAuthInput>
     deleteMany?: Enumerable<PostScalarWhereInput>
   }
 
@@ -4453,10 +4453,10 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type GoogleUserCreateNestedOneWithoutPostsInput = {
-    create?: XOR<GoogleUserCreateWithoutPostsInput, GoogleUserUncheckedCreateWithoutPostsInput>
-    connectOrCreate?: GoogleUserCreateOrConnectWithoutPostsInput
-    connect?: GoogleUserWhereUniqueInput
+  export type AuthCreateNestedOneWithoutPostsInput = {
+    create?: XOR<AuthCreateWithoutPostsInput, AuthUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: AuthCreateOrConnectWithoutPostsInput
+    connect?: AuthWhereUniqueInput
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -4473,14 +4473,14 @@ export namespace Prisma {
     update?: XOR<UserUpdateWithoutPostsInput, UserUncheckedUpdateWithoutPostsInput>
   }
 
-  export type GoogleUserUpdateOneWithoutPostsInput = {
-    create?: XOR<GoogleUserCreateWithoutPostsInput, GoogleUserUncheckedCreateWithoutPostsInput>
-    connectOrCreate?: GoogleUserCreateOrConnectWithoutPostsInput
-    upsert?: GoogleUserUpsertWithoutPostsInput
+  export type AuthUpdateOneWithoutPostsInput = {
+    create?: XOR<AuthCreateWithoutPostsInput, AuthUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: AuthCreateOrConnectWithoutPostsInput
+    upsert?: AuthUpsertWithoutPostsInput
     disconnect?: boolean
     delete?: boolean
-    connect?: GoogleUserWhereUniqueInput
-    update?: XOR<GoogleUserUpdateWithoutPostsInput, GoogleUserUncheckedUpdateWithoutPostsInput>
+    connect?: AuthWhereUniqueInput
+    update?: XOR<AuthUpdateWithoutPostsInput, AuthUncheckedUpdateWithoutPostsInput>
   }
 
   export type NestedStringFilter = {
@@ -4631,7 +4631,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     published?: boolean
     title: string
-    googleUser?: GoogleUserCreateNestedOneWithoutPostsInput
+    auth?: AuthCreateNestedOneWithoutPostsInput
   }
 
   export type PostUncheckedCreateWithoutUserInput = {
@@ -4640,7 +4640,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     published?: boolean
     title: string
-    googleUserId?: string | null
+    authId?: string | null
   }
 
   export type PostCreateOrConnectWithoutUserInput = {
@@ -4678,10 +4678,10 @@ export namespace Prisma {
     published?: BoolFilter | boolean
     title?: StringFilter | string
     userId?: StringNullableFilter | string | null
-    googleUserId?: StringNullableFilter | string | null
+    authId?: StringNullableFilter | string | null
   }
 
-  export type PostCreateWithoutGoogleUserInput = {
+  export type PostCreateWithoutAuthInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4690,7 +4690,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutPostsInput
   }
 
-  export type PostUncheckedCreateWithoutGoogleUserInput = {
+  export type PostUncheckedCreateWithoutAuthInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4699,27 +4699,27 @@ export namespace Prisma {
     userId?: string | null
   }
 
-  export type PostCreateOrConnectWithoutGoogleUserInput = {
+  export type PostCreateOrConnectWithoutAuthInput = {
     where: PostWhereUniqueInput
-    create: XOR<PostCreateWithoutGoogleUserInput, PostUncheckedCreateWithoutGoogleUserInput>
+    create: XOR<PostCreateWithoutAuthInput, PostUncheckedCreateWithoutAuthInput>
   }
 
-  export type PostCreateManyGoogleUserInputEnvelope = {
-    data: Enumerable<PostCreateManyGoogleUserInput>
+  export type PostCreateManyAuthInputEnvelope = {
+    data: Enumerable<PostCreateManyAuthInput>
   }
 
-  export type PostUpsertWithWhereUniqueWithoutGoogleUserInput = {
+  export type PostUpsertWithWhereUniqueWithoutAuthInput = {
     where: PostWhereUniqueInput
-    update: XOR<PostUpdateWithoutGoogleUserInput, PostUncheckedUpdateWithoutGoogleUserInput>
-    create: XOR<PostCreateWithoutGoogleUserInput, PostUncheckedCreateWithoutGoogleUserInput>
+    update: XOR<PostUpdateWithoutAuthInput, PostUncheckedUpdateWithoutAuthInput>
+    create: XOR<PostCreateWithoutAuthInput, PostUncheckedCreateWithoutAuthInput>
   }
 
-  export type PostUpdateWithWhereUniqueWithoutGoogleUserInput = {
+  export type PostUpdateWithWhereUniqueWithoutAuthInput = {
     where: PostWhereUniqueInput
-    data: XOR<PostUpdateWithoutGoogleUserInput, PostUncheckedUpdateWithoutGoogleUserInput>
+    data: XOR<PostUpdateWithoutAuthInput, PostUncheckedUpdateWithoutAuthInput>
   }
 
-  export type PostUpdateManyWithWhereWithoutGoogleUserInput = {
+  export type PostUpdateManyWithWhereWithoutAuthInput = {
     where: PostScalarWhereInput
     data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutPostsInput>
   }
@@ -4729,7 +4729,7 @@ export namespace Prisma {
     createdAt?: Date | string
     email: string
     password: string
-    name?: string | null
+    displayName?: string | null
     role?: Role
   }
 
@@ -4738,7 +4738,7 @@ export namespace Prisma {
     createdAt?: Date | string
     email: string
     password: string
-    name?: string | null
+    displayName?: string | null
     role?: Role
   }
 
@@ -4747,27 +4747,27 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
   }
 
-  export type GoogleUserCreateWithoutPostsInput = {
+  export type AuthCreateWithoutPostsInput = {
     id?: string
-    googleId: string
-    name: string
-    email: string
-    avatar: string
+    clientId: string
+    displayName?: string | null
+    email?: string | null
+    avatar?: string | null
     role?: Role
   }
 
-  export type GoogleUserUncheckedCreateWithoutPostsInput = {
+  export type AuthUncheckedCreateWithoutPostsInput = {
     id?: string
-    googleId: string
-    name: string
-    email: string
-    avatar: string
+    clientId: string
+    displayName?: string | null
+    email?: string | null
+    avatar?: string | null
     role?: Role
   }
 
-  export type GoogleUserCreateOrConnectWithoutPostsInput = {
-    where: GoogleUserWhereUniqueInput
-    create: XOR<GoogleUserCreateWithoutPostsInput, GoogleUserUncheckedCreateWithoutPostsInput>
+  export type AuthCreateOrConnectWithoutPostsInput = {
+    where: AuthWhereUniqueInput
+    create: XOR<AuthCreateWithoutPostsInput, AuthUncheckedCreateWithoutPostsInput>
   }
 
   export type UserUpsertWithoutPostsInput = {
@@ -4779,7 +4779,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
   }
 
@@ -4787,28 +4787,28 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
   }
 
-  export type GoogleUserUpsertWithoutPostsInput = {
-    update: XOR<GoogleUserUpdateWithoutPostsInput, GoogleUserUncheckedUpdateWithoutPostsInput>
-    create: XOR<GoogleUserCreateWithoutPostsInput, GoogleUserUncheckedCreateWithoutPostsInput>
+  export type AuthUpsertWithoutPostsInput = {
+    update: XOR<AuthUpdateWithoutPostsInput, AuthUncheckedUpdateWithoutPostsInput>
+    create: XOR<AuthCreateWithoutPostsInput, AuthUncheckedCreateWithoutPostsInput>
   }
 
-  export type GoogleUserUpdateWithoutPostsInput = {
-    googleId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    avatar?: StringFieldUpdateOperationsInput | string
+  export type AuthUpdateWithoutPostsInput = {
+    clientId?: StringFieldUpdateOperationsInput | string
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
   }
 
-  export type GoogleUserUncheckedUpdateWithoutPostsInput = {
-    googleId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    avatar?: StringFieldUpdateOperationsInput | string
+  export type AuthUncheckedUpdateWithoutPostsInput = {
+    clientId?: StringFieldUpdateOperationsInput | string
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
   }
 
@@ -4818,7 +4818,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     published?: boolean
     title: string
-    googleUserId?: string | null
+    authId?: string | null
   }
 
   export type PostUpdateWithoutUserInput = {
@@ -4826,7 +4826,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     published?: BoolFieldUpdateOperationsInput | boolean
     title?: StringFieldUpdateOperationsInput | string
-    googleUser?: GoogleUserUpdateOneWithoutPostsInput
+    auth?: AuthUpdateOneWithoutPostsInput
   }
 
   export type PostUncheckedUpdateWithoutUserInput = {
@@ -4834,7 +4834,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     published?: BoolFieldUpdateOperationsInput | boolean
     title?: StringFieldUpdateOperationsInput | string
-    googleUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    authId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PostUncheckedUpdateManyWithoutPostsInput = {
@@ -4842,10 +4842,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     published?: BoolFieldUpdateOperationsInput | boolean
     title?: StringFieldUpdateOperationsInput | string
-    googleUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    authId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type PostCreateManyGoogleUserInput = {
+  export type PostCreateManyAuthInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4854,7 +4854,7 @@ export namespace Prisma {
     userId?: string | null
   }
 
-  export type PostUpdateWithoutGoogleUserInput = {
+  export type PostUpdateWithoutAuthInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     published?: BoolFieldUpdateOperationsInput | boolean
@@ -4862,7 +4862,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutPostsInput
   }
 
-  export type PostUncheckedUpdateWithoutGoogleUserInput = {
+  export type PostUncheckedUpdateWithoutAuthInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     published?: BoolFieldUpdateOperationsInput | boolean

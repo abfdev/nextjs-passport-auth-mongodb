@@ -5,15 +5,15 @@ import Image from "next/image";
 function Dashboard({ user }) {
   return (
     <div>
-      <h1>name : {user.name}</h1>
+      <h1>name : {user.displayName}</h1>
       <p>email : {user.email}</p>
       <div className="relative h-20 w-20 overflow-hidden rounded-full">
         <Image
           src={
             user.avatar ||
-            `https://ui-avatars.com/api/?background=random&name=${user.name}&font-size=0.5&size=130`
+            `https://ui-avatars.com/api/?background=random&name=${user.displayName}&font-size=0.5&size=130`
           }
-          alt={user.name}
+          alt={user.displayName}
           layout="fill"
         />
       </div>

@@ -110,17 +110,14 @@ function Home(props) {
               </span>
               <div className="flex-grow border-2 border-t border-slate-100"></div>
             </div>
-            <Link
-              href="/api/auth/github"
-              className="flex w-full items-center gap-4 rounded-md border-2 border-slate-300 p-3 text-slate-800 shadow-md"
-            >
-              <div className="mt-10 flex w-full items-center gap-4 rounded-md border-2 border-slate-300 p-3 text-slate-800 shadow-md">
+            <Link href="/api/auth/github">
+              <div className="mt-10 flex w-full cursor-pointer items-center gap-4 rounded-md border-2 border-slate-300 p-3 text-slate-800 shadow-md hover:bg-slate-100">
                 <Image width={24} height={24} alt="" src={Github} />
                 Continue With GitHub
               </div>
             </Link>
             <Link href="/api/auth/google">
-              <div className="mt-10 flex w-full items-center gap-4 rounded-md border-2 border-slate-300 p-3 text-slate-800 shadow-md">
+              <div className="mt-10 flex w-full cursor-pointer items-center gap-4 rounded-md border-2 border-slate-300 p-3 text-slate-800 shadow-md hover:bg-slate-100">
                 <Image src={Google} width={24} height={24} alt="" />
                 Continue With Google
               </div>

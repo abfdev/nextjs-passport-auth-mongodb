@@ -8,9 +8,4 @@ const handler = async (req, res) => {
   });
 };
 
-export const config = {
-  api: {
-    externalResolver: true,
-  },
-};
 export default await withPassport(googleStrategy, handler);
