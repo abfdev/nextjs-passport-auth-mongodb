@@ -87,18 +87,18 @@ function SingUp(props) {
 						</div>
 					</form>
 					<div className="flex items-center justify-center gap-3">
-						<div className="flex-grow border-t-2  border-gray-200" />
+						<div className="flex-grow border-t-2 border-gray-200" />
 						<span className="text-md flex-shrink px-2 font-semibold text-slate-400/80">OR</span>
-						<div className="flex-grow border-t-2   border-gray-200" />
+						<div className="flex-grow border-t-2 border-gray-200" />
 					</div>
 					<Link href="/api/auth/github">
-						<div className="my-10 flex w-full cursor-pointer items-center gap-4 rounded-md border border-slate-300 bg-slate-100 p-3 text-slate-900 shadow-sm hover:bg-slate-200">
+						<div className="my-10 flex w-full cursor-pointer items-center gap-4 rounded-md border border-slate-300 bg-slate-100 p-3 font-bold text-slate-900 shadow-sm hover:bg-slate-200">
 							<Image width={24} height={24} alt="" src={Github} />
 							Continue With GitHub
 						</div>
 					</Link>
 					<Link href="/api/auth/google">
-						<div className="my-10 flex w-full cursor-pointer items-center gap-4 rounded-md border border-slate-300 bg-slate-100 p-3 text-slate-900 shadow-sm hover:bg-slate-200">
+						<div className="my-10 flex w-full cursor-pointer items-center gap-4 rounded-md border border-slate-300 bg-slate-100 p-3 font-bold text-slate-900 shadow-sm hover:bg-slate-200">
 							<Image src={Google} width={24} height={24} alt="" />
 							Continue With Google
 						</div>

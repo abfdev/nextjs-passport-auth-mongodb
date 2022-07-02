@@ -77,7 +77,7 @@ const LoginFrom = () => {
 						Log in
 					</button>
 					<p className="flex-1 space-x-2">
-						<span>Don't have an account?</span>
+						<span>Dont have an account?</span>
 						<Link href="/singup">
 							<span className="cursor-pointer font-semibold text-sky-500">Sign Up</span>
 						</Link>
