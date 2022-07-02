@@ -54,7 +54,7 @@ const LoginFrom = () => {
 					required={{
 						pattern: {
 							value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-							message: "Invalid email",
+							message: "invalid email",
 						},
 					}}
 				/>
@@ -62,23 +62,24 @@ const LoginFrom = () => {
 					label="password"
 					register={register}
 					errors={errors}
+					type="password"
 					required={{
 						minLength: {
 							value: 4,
-							message: "Password must be at least 4 characters",
+							message: "password must be at least 4 characters",
 						},
 					}}
 				/>
 				<div className="mt-6 flex w-full items-center gap-3">
 					<button
 						type="submit"
-						className="font-base w-1/3 rounded-md bg-sky-500  py-2 font-semibold text-white shadow-sm hover:bg-sky-600">
-						Next
+						className="font-base rounded-md bg-sky-500 px-14  py-2 font-bold text-white shadow-sm hover:bg-sky-600">
+						Log in
 					</button>
-					<p className="flex-1">
-						Dont have an account?{" "}
+					<p className="flex-1 space-x-2">
+						<span>Don't have an account?</span>
 						<Link href="/singup">
-							<span className="cursor-pointer text-sky-500"> Sign Up</span>
+							<span className="cursor-pointer font-semibold text-sky-500">Sign Up</span>
 						</Link>
 					</p>
 				</div>
