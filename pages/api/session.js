@@ -1,13 +1,10 @@
-import { withProtectedApiRoute } from "@lib/protectedRoute";
+import {generateSecret, verify} from "2fa-util";
+
 
 const handler = async (req, res) => {
+  const authQRCode = await generateSecret('John Doe', 'Company');
   res.json({
-    view: req.session,
+    authQRCode,
   });
 };
-export const config = {
-  api: {
-    externalResolver: true,
-  },
-};
-export default withProtectedApiRoute("/", handler);
+export default handler;

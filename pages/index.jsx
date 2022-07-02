@@ -1,139 +1,41 @@
-import { useRef, useState } from "react";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import { useForm } from "react-hook-form";
-import Link from "next/link";
-
-import { Input } from "@components/forms";
-
-import "react-toastify/dist/ReactToastify.css";
 import Google from "@assets/google.svg";
 import Github from "@assets/github.svg";
-import { withProtectedRouteNoLogin } from "@lib/protectedRoute";
+import Link from "next/link";
+import Image from "next/image";
+import {withProtectedRouteNoLogin} from "@lib/protectedRoute";
+import LoginForm from "@components/loginForm";
 
 /** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
 function Home(props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const toastId = useRef(null);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const router = useRouter();
-  const loginForm = useRef(null);
-
-  const formSubmit = async (data) => {
-    if (data) {
-      const { email, password } = data;
-      const response = await toast.promise(
-        axios.post("/api/login", { email, password }),
-        {
-          pending: "login processing...",
-          error: "Please provide a valid email address and password.",
-        },
-        {
-          toastId,
-        }
-      );
-      if (response.status === 200) {
-        router.push("/dashboard");
-      }
-    }
-  };
-  return (
-    <div className="flex h-screen w-full items-center justify-center">
-      <div className="hidden h-full flex-1 lg:flex"></div>
-      <div className="relative flex h-full flex-1 items-center justify-center overflow-auto bg-gradient-to-b from-[#e0ecf8d4] via-[#eff7ff] to-[#fafbfd] px-6">
-        <div className="relative h-auto w-full flex-none space-y-4 rounded-md border bg-white py-10 px-8 shadow-lg md:w-[500px]">
-          {isLoading ? (
-            <div className="absolute inset-0 flex animate-pulse overflow-hidden rounded-t-md">
-              <div className="h-2 flex-1 animate-waving-hand rounded bg-indigo-500"></div>
-            </div>
-          ) : null}
-          <h1 className="text-center align-middle text-4xl font-semibold">
-            Log in
-          </h1>
-          <ToastContainer
-            position="top-center"
-            autoClose={1200}
-            pauseOnHover
-            ref={toastId}
-          />
-          <form
-            method="POST"
-            onSubmit={handleSubmit(formSubmit)}
-            action="/api/login"
-            className="flex flex-col space-y-2"
-            ref={loginForm}
-          >
-            <Input
-              label="email"
-              register={register}
-              errors={errors}
-              required={{
-                required: true,
-                pattern: /\S+@\S+\.\S+/i,
-              }}
-              errMessage={{
-                required: "Email is required",
-                pattern: "Email is invalid",
-              }}
-            />
-            <Input
-              label="password"
-              register={register}
-              errors={errors}
-              required={{
-                required: true,
-                minLength: 4,
-              }}
-              errMessage={{
-                required: "This field is required",
-                minLength: "Password must be at least 4 characters",
-              }}
-            />
-            <div className="flex w-full">
-              <button
-                type="submit"
-                className="mt-10 w-full rounded-md border-2 border-[#78a2b5] bg-[#03A9F4] py-3 font-bold text-white shadow-md"
-              >
-                Login
-              </button>
-            </div>
-            <div className="flex items-center justify-center gap-3 py-4">
-              <div className="flex-grow border-2 border-t border-slate-100"></div>
-              <span className="text-md flex-shrink font-semibold text-slate-400/80">
-                OR
-              </span>
-              <div className="flex-grow border-2 border-t border-slate-100"></div>
-            </div>
-            <Link href="/api/auth/github">
-              <div className="mt-10 flex w-full cursor-pointer items-center gap-4 rounded-md border-2 border-slate-300 p-3 text-slate-800 shadow-md hover:bg-slate-100">
-                <Image width={24} height={24} alt="" src={Github} />
-                Continue With GitHub
-              </div>
-            </Link>
-            <Link href="/api/auth/google">
-              <div className="mt-10 flex w-full cursor-pointer items-center gap-4 rounded-md border-2 border-slate-300 p-3 text-slate-800 shadow-md hover:bg-slate-100">
-                <Image src={Google} width={24} height={24} alt="" />
-                Continue With Google
-              </div>
-            </Link>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div className="flex h-screen w-full items-center justify-center">
+			<div className="relative flex h-full flex-1 items-center justify-center overflow-auto bg-gradient-to-b from-[#e0ecf8d4] via-[#eff7ff] to-[#fafbfd] px-6">
+				<div className="relative h-auto w-full flex-none space-y-4 rounded-md border bg-white py-10 px-8 shadow-sm sm:w-[410px]">
+					<h1 className="text-center align-middle text-2xl font-semibold">Log in</h1>
+					<LoginForm />
+					<div className="flex items-center justify-center gap-3">
+						<div className="flex-grow border-t-2  border-gray-200" />
+						<span className="text-md flex-shrink px-2 font-semibold text-slate-400/80">OR</span>
+						<div className="flex-grow border-t-2   border-gray-200" />
+					</div>
+					<Link href="/api/auth/github">
+						<div className="my-10 flex w-full cursor-pointer items-center gap-4 rounded-md border border-slate-300 bg-slate-100 p-3 text-slate-900 shadow-sm hover:bg-slate-200">
+							<Image width={24} height={24} alt="" src={Github} />
+							Continue With GitHub
+						</div>
+					</Link>
+					<Link href="/api/auth/google">
+						<div className="my-10 flex w-full cursor-pointer items-center gap-4 rounded-md border border-slate-300 bg-slate-100 p-3 text-slate-900 shadow-sm hover:bg-slate-200">
+							<Image src={Google} width={24} height={24} alt="" />
+							Continue With Google
+						</div>
+					</Link>
+				</div>
+			</div>
+		</div>
+	);
 }
 
-export const getServerSideProps = withProtectedRouteNoLogin(
-  "/dashboard",
-  async ({ req }) => {
-    return { props: { data: null } };
-  }
-);
+export const getServerSideProps = withProtectedRouteNoLogin("/dashboard");
 
 export default Home;
