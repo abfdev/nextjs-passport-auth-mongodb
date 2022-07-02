@@ -1,9 +1,6 @@
-export const Input = ({ label, register, errors, required }) => {
+export const Input = ({label, register, errors, required}) => {
 	return (
-		<div className="group relative flex h-20 flex-col transition-all duration-75">
-			<label className="invisible relative top-9  px-2 font-semibold capitalize text-slate-500 transition-all duration-75 group-focus-within:visible group-focus-within:top-3">
-				{label}
-			</label>
+		<div className="relative mt-6">
 			<input
 				{...register(label, {
 					...required,
@@ -13,11 +10,15 @@ export const Input = ({ label, register, errors, required }) => {
 					},
 				})}
 				type={label == "password" ? label : "text"}
-				className={`border-1  rounded-md py-3 placeholder:font-semibold placeholder:capitalize focus:placeholder:invisible ${
+				className={`border-1 peer w-full rounded-md py-3 placeholder:font-semibold placeholder:capitalize ${
 					errors?.[label] ? "border-red-600" : "border-slate-300"
 				}`}
 				placeholder={label}
 			/>
+			<label className=" visible absolute left-0 -top-3.5 w-auto  pl-2 font-semibold capitalize text-slate-500 transition-all duration-75 peer-placeholder-shown:invisible peer-placeholder-shown:top-0">
+				<div className="absolute top-2 h-2 w-full bg-white"></div>
+				<p className="relative pl-1">{label}</p>
+			</label>
 			<div className="h-6 text-base font-light text-red-600 transition-all duration-75">
 				{errors?.[label]?.message}
 			</div>
