@@ -4,6 +4,7 @@ import axios from "axios";
 import {ToastContainer, toast} from "react-toastify";
 import {useForm} from "react-hook-form";
 import {Input} from "@components/inputs";
+import Link from "next/link";
 
 import "react-toastify/dist/ReactToastify.css";
 const LoginFrom = () => {
@@ -68,12 +69,18 @@ const LoginFrom = () => {
 						},
 					}}
 				/>
-				<div className="mt-6 flex w-full">
+				<div className="mt-6 flex w-full items-center gap-3">
 					<button
 						type="submit"
-						className="font-base w-full rounded-md bg-sky-500  py-3 font-semibold text-white shadow-sm hover:bg-sky-600">
-						Login
+						className="font-base w-1/3 rounded-md bg-sky-500  py-2 font-semibold text-white shadow-sm hover:bg-sky-600">
+						Next
 					</button>
+					<p className="flex-1">
+						Dont have an account?{" "}
+						<Link href="/singup">
+							<span className="cursor-pointer text-sky-500"> Sign Up</span>
+						</Link>
+					</p>
 				</div>
 			</form>
 		</div>

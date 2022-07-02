@@ -10,8 +10,8 @@ function Home(props) {
 	return (
 		<div className="flex h-screen w-full items-center justify-center">
 			<div className="relative flex h-full flex-1 items-center justify-center overflow-auto bg-gradient-to-b from-[#e0ecf8d4] via-[#eff7ff] to-[#fafbfd] px-6">
-				<div className="relative h-auto w-full flex-none space-y-4 rounded-md border bg-white py-10 px-8 shadow-sm sm:w-[410px]">
-					<h1 className="text-center align-middle text-2xl font-semibold">Log in</h1>
+				<div className="relative h-auto w-full flex-none space-y-4 rounded-md border bg-white py-10 px-8 shadow-sm sm:w-[480px]">
+					<h1 className="text-center align-middle text-2xl font-semibold">Log in to your account</h1>
 					<LoginForm />
 					<div className="flex items-center justify-center gap-3">
 						<div className="flex-grow border-t-2  border-gray-200" />

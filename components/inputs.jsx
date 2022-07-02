@@ -9,7 +9,7 @@ export const Input = ({label, register, errors, required}) => {
 						message: label + " is required",
 					},
 				})}
-				type={label == "password" ? label : "text"}
+				type={label == "password" || label == "confirm password" ? "password" : "text"}
 				className={`border-1 peer w-full rounded-md py-3 placeholder:font-semibold placeholder:capitalize ${
 					errors?.[label] ? "border-red-600" : "border-slate-300"
 				}`}
