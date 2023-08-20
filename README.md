@@ -33,15 +33,15 @@
 
       GOOGLE_CLIENT_ID = "your-google-client-id"
       GOOGLE_CLIENT_SECRET = "your-google-client-secret"
-      GOOGLE_CALLBACK_URL_PRODUCTION= "your-google-callback-url"
-      GOOGLE_CALLBACK_URL_DEVELOPMENT= "your-google-callback-url"
+      GOOGLE_CALLBACK_URL_PRODUCTION= "<domaine name>/api/auth/google/callback"
+      GOOGLE_CALLBACK_URL_DEVELOPMENT= "<domaine name>/api/auth/google/callback"
 
       GITHUB_CLIENT_ID_PRODUCTION = "your-github-client-id"
       GITHUB_CLIENT_SECRET_PRODUCTION = "your-github-client-secret"
       GITHUB_CLIENT_ID = "your-github-client-id"
       GITHUB_CLIENT_SECRET = "your-github-client-secret"
-      GITHUB_CALLBACK_URL_PRODUCTION = "your-github-callback-url"
-      GITHUB_CALLBACK_URL_DEVELOPMENT= "your-github-callback-url"
+      GITHUB_CALLBACK_URL_PRODUCTION = "<domaine name>/api/auth/github/callback"
+      GITHUB_CALLBACK_URL_DEVELOPMENT= "http://localhost:3000/api/auth/github/callback"
 
       MAIL_HOST = "localhost"
       MAIL_PORT = 1025
