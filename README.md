@@ -1,34 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Project: Integrating Passport.js Authentication in Next.js with MongoDB, Prisma, and Tailwind CSS
 
-## Getting Started
+### Steps:
 
-First, run the development server:
+1. **Clone the Repository:**
+   Clone the repository using the following command:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+    ```sh
+    git clone https://github.com/abfdev/nextjs-passport-auth-mongodb.git
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Navigate to the Cloned Repository:**
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+    ```sh
+    cd nextjs-passport-auth-mongodb
+    ```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+3. **Install Dependencies:**
+   Install required npm packages:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+    ```sh
+    npm install
+    ```
 
-## Learn More
+4. **Set Up Environment Variables:**
+   Edit `.env` file and add environment variables:
 
-To learn more about Next.js, take a look at the following resources:
+    ```.env
+      DATABASE_PROVIDER= "mongodb"
+      DATABASE_URL= "mongodb+srv://<your-mongodb-connection-url>"
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+      SESSION_SECRET= "your-session-secret"
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+      GOOGLE_CLIENT_ID = "your-google-client-id"
+      GOOGLE_CLIENT_SECRET = "your-google-client-secret"
+      GOOGLE_CALLBACK_URL_PRODUCTION= "your-google-callback-url"
+      GOOGLE_CALLBACK_URL_DEVELOPMENT= "your-google-callback-url"
 
-## Deploy on Vercel
+      GITHUB_CLIENT_ID_PRODUCTION = "your-github-client-id"
+      GITHUB_CLIENT_SECRET_PRODUCTION = "your-github-client-secret"
+      GITHUB_CLIENT_ID = "your-github-client-id"
+      GITHUB_CLIENT_SECRET = "your-github-client-secret"
+      GITHUB_CALLBACK_URL_PRODUCTION = "your-github-callback-url"
+      GITHUB_CALLBACK_URL_DEVELOPMENT= "your-github-callback-url"
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+      MAIL_HOST = "localhost"
+      MAIL_PORT = 1025
+      MAIL_USER =
+      MAIL_PASS =
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+      NEXT_PUBLIC_APP_URL=http://localhost:3000
+    ```
+
+5. **Generate Prisma Client:**
+   Generate Prisma client code:
+
+    ```sh
+    npx prisma generate
+    ```
+
+6. **Run Prisma Migrations:**
+   Run migrations if schema changed:
+
+    ```sh
+    npx prisma migrate dev
+    ```
+
+7. **Start the Development Server:**
+   Start Next.js server:
+
+    ```sh
+    npm run dev
+    ```
+
+8. **Access the Application:**
+   Open a web browser and go to `http://localhost:3000`.
+
+By following these steps, you'll integrate Passport.js authentication, MongoDB, Prisma, and Tailwind CSS into your Next.js application.
