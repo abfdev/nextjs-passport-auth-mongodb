@@ -15,7 +15,7 @@
 	"dependencies": {
 		"@prisma/client": "^3.15.2",
 		"2fa-util": "^1.1.1",
-		"axios": "^0.27.2",
+		"axios": "^1.8.2",
 		"bcryptjs": "^2.4.3",
 		"classnames": "^2.3.1",
 		"connect-mongo": "^4.6.0",
